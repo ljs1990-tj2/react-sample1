@@ -1,28 +1,28 @@
-import { useRef, useState } from "react";
-import Input from "./componet1017/Input";
-import Result from "./componet1017/Result";
+import React, { useReducer } from 'react';
+
+const reducer = (state, action)=>{
+  if(action.type === "UP"){
+    return state = state + 1;
+  } else if(action.type === "DOWN"){
+    return state = state - 1;
+  } else {
+    return state;
+  }
+}
 
 function App() {
-  const firstNum = useRef();
-  const secondNum = useRef();
-  const [result, setResult] = useState({ firstNum: "", secondNum: "" });
-
-  const calc = () => {
-    setResult({
-      firstNum: firstNum.current.value,
-      secondNum: secondNum.current.value,
-    });
-  };
-
+  const [number, dispatch] = useReducer(reducer, 10);
+  const style = {color : 'white', backgroundColor : 'blue'};
   return (
-    <>
-      <Result firstNum={result.firstNum} secondNum={result.secondNum} />
-      <div>
-        <input ref={firstNum} placeholder='첫번째 숫자'></input><br></br>
-        <input ref={secondNum} placeholder='두번째 숫자'></input><br></br>
-        <button onClick={calc}>계산!</button>
-      </div>
-    </>
+    <div style={style}>
+      <div>{number}</div>
+       <button onClick={()=>{
+        dispatch({type : "UP"});
+       }}>증가</button>
+       <button onClick={()=>{
+        dispatch({type : "DOWN"});
+       }}>감소</button>
+    </div>
   );
 }
 

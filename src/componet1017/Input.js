@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Input(props) {
+    
     return (
         <div>
             <input placeholder='첫번째 숫자'></input><br></br>
